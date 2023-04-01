@@ -6,7 +6,7 @@
         :key="m.text"
         :name="m.name"
         :text="m.text"
-        owner
+        :owner="m.id === user.id"
       />
     </div>
     <div class="c-form">
@@ -17,25 +17,22 @@
 
 <script>
 import { mapState } from "vuex";
-import Message from "../components/Message.vue";
-import ChatForm from "../components/ChatForm.vue";
+import Message from "@/components/Message";
+import ChatForm from "@/components/ChatForm";
 
 export default {
   middleware: ["chat"],
-  components: {
-    Message,
-    ChatForm,
-  },
   head() {
     return {
-      title: `Room ${this.user.room}`,
+      title: `Комната ${this.user.room}`,
     };
   },
-  computed: { ...mapState(["user", "messages"]) },
+  components: { Message, ChatForm },
+  computed: mapState(["user", "messages"]),
 };
 </script>
 
-<style>
+<style scoped>
 .c-wrap {
   height: 100%;
   position: relative;
@@ -57,8 +54,10 @@ export default {
   top: 0;
   right: 0;
   left: 0;
-  bottom: 0;
+  bottom: 80px;
   padding: 1rem;
   overflow-y: auto;
 }
 </style>
+
+

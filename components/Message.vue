@@ -14,8 +14,8 @@
     </div>
   </div>
 </template>
-  
-  <script>
+
+<script>
 export default {
   props: {
     name: String,
@@ -28,34 +28,39 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .system {
   margin-bottom: 1rem;
+
+  p {
+    margin-bottom: 1rem;
+  }
 }
 
-.system p {
-  margin-bottom: 1rem;
-}
 .wrap {
   display: flex;
   flex-direction: column;
 }
+
 .mes {
   padding: 1rem;
   width: 60%;
   margin: 0 1rem;
   box-shadow: 0 1px 0 0 rgba(50, 50, 50, 0.3);
-  background: #1976d2;
   border-radius: 4px;
+  background: #1976d2;
+  position: relative;
   margin-bottom: 1rem;
-}
-.mes p {
-  margin-bottom: 0;
+
+  p {
+    margin-bottom: 0;
+  }
 }
 
 .owner {
-  background: #fff;
-  color: #000;
+  background: #ffffff;
+  color: #000000;
   align-self: flex-end;
 }
 </style>
+

@@ -3,13 +3,13 @@
     <v-navigation-drawer mobile-break-point="560" app v-model="drawer"
       ><v-list subheader>
         <v-subheader>List of users in chat</v-subheader>
-        <v-list-tile v-for="user in users" :key="user.id" @click.prevent="">
+        <v-list-tile v-for="u in users" :key="u.id" @click.prevent="">
           <v-list-tile-content>
-            <v-list-tile-title>{{ user.name }}</v-list-tile-title>
+            <v-list-tile-title>{{ u.name }}</v-list-tile-title>
           </v-list-tile-content>
 
           <v-list-tile-action>
-            <v-icon :color="user.id === 2 ? 'primary' : 'grey'"
+            <v-icon :color="u.id === user.id ? 'primary' : 'grey'"
               >chat_bubble</v-icon
             >
           </v-list-tile-action>
@@ -35,19 +35,19 @@ export default {
   data: () => {
     return {
       drawer: true,
-      users: [
-        { id: 1, name: "Rodion" },
-        { id: 2, name: "Ira" },
-      ],
     };
   },
   computed: {
-    ...mapState(["user"]),
+    ...mapState(["user", "users"]),
   },
   methods: {
     ...mapMutations(["clearData"]),
 
     exit() {
+      this.$socket.emit("userLeft", this.user.id, () => {
+        this.$router.push("/?message=leftChat");
+        this.clearData();
+      });
       this.$router.push("/?message=leftChat");
       this.clearData();
     },
